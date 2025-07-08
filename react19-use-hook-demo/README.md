@@ -6,16 +6,14 @@ Bu proje, React 19 ile birlikte gelen `use()` hook'unu kullanarak rastgele bir a
 
 ## 🔧 Kullanılan Teknolojiler
 
-- ✅ React 19
-- ✅ Next.js 13+ (App Router)
-- ✅ TypeScript
-- ✅ Suspense (yüklenme ekranı)
-- ✅ Server Components
-- ✅ Bored API (`https://bored-api.appbrewery.com/random`)
+-  TypeScript
+-  Suspense (yüklenme ekranı)
+-  Server Components
+-  Bored API (`https://bored-api.appbrewery.com/random`)
 
 ---
 
-## 📄 Proje Açıklaması
+##  Proje Açıklaması
 
 Bu projede, `use()` hook'u kullanılarak veriler **Server Component** içinde asenkron şekilde çekilir. Bu sayede:
 - Kod sadeleşir
@@ -27,7 +25,7 @@ Bu projede, `use()` hook'u kullanılarak veriler **Server Component** içinde as
 
 Bu projede kullanılan `use()` hook’u, React 19 ile gelen yeniliklerden biridir. Aşağıda eski yöntemle farkını görebilirsin:
 
-### 🔄 Eski Yöntem: `useEffect` + `useState`
+### Eski Yöntem: `useEffect` + `useState`
 
 ```tsx
 'use client'
@@ -46,3 +44,17 @@ export default function HomePage() {
 
   return <div>{joke.activity}</div>;
 }
+
+
+### Yeni Yöntem: `React 19 use()` 
+```tsx
+import { use } from 'react';
+import { getJoke } from '@/lib/api';
+
+export default function HomePage() {
+  const joke = use(getJoke());
+
+  return <div>{joke.activity}</div>;
+}
+
+
