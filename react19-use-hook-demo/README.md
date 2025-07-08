@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React 19 `use()` Hook ile Aktivite Uygulaması
 
-## Getting Started
+Bu proje, React 19 ile birlikte gelen `use()` hook'unu kullanarak rastgele bir aktivite verisini Bored API üzerinden çeker. Next.js 13+ App Router yapısı ile geliştirilmiştir.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔧 Kullanılan Teknolojiler
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- ✅ React 19
+- ✅ Next.js 13+ (App Router)
+- ✅ TypeScript
+- ✅ Suspense (yüklenme ekranı)
+- ✅ Server Components
+- ✅ Bored API (`https://bored-api.appbrewery.com/random`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📄 Proje Açıklaması
 
-## Learn More
+Bu projede, `use()` hook'u kullanılarak veriler **Server Component** içinde asenkron şekilde çekilir. Bu sayede:
+- Kod sadeleşir
+- Veri çekme işlemi `Suspense` ile sarmalanır ve yüklenme ekranı otomatik olarak gösterilir.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## React 19 `use()` vs Klasik Veri Çekme
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Bu projede kullanılan `use()` hook’u, React 19 ile gelen yeniliklerden biridir. Aşağıda eski yöntemle farkını görebilirsin:
 
-## Deploy on Vercel
+### 🔄 Eski Yöntem: `useEffect` + `useState`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```tsx
+'use client'
+import { useEffect, useState } from 'react';
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export default function HomePage() {
+  const [joke, setJoke] = useState(null);
+
+  useEffect(() => {
+    fetch('https://bored-api.appbrewery.com/random')
+      .then(res => res.json())
+      .then(data => setJoke(data));
+  }, []);
+
+  if (!joke) return <p>Yükleniyor...</p>;
+
+  return <div>{joke.activity}</div>;
+}
