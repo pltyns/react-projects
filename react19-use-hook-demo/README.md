@@ -1,31 +1,32 @@
-# React 19 `use()` Hook ile Aktivite Uygulaması
 
-Bu proje, React 19 ile birlikte gelen `use()` hook'unu kullanarak rastgele bir aktivite verisini Bored API üzerinden çeker. Next.js 13+ App Router yapısı ile geliştirilmiştir.
+# React 19 `use()` Hook Activity App
 
----
-
-##  Kullanılan Teknolojiler
-
--  TypeScript
--  Suspense (yüklenme ekranı)
--  Server Components
--  Bored API (`https://bored-api.appbrewery.com/random`)
+This project fetches a random activity from the Bored API using the new React 19 `use()` hook. It is built with Next.js 13+ App Router.
 
 ---
 
-##  Proje Açıklaması
+## Technologies Used
 
-Bu projede, `use()` hook'u kullanılarak veriler **Server Component** içinde asenkron şekilde çekilir. Bu sayede:
-- Kod sadeleşir
-- Veri çekme işlemi `Suspense` ile sarmalanır ve yüklenme ekranı otomatik olarak gösterilir.
+- TypeScript
+- Suspense (loading screen)
+- Server Components
+- Bored API (`https://bored-api.appbrewery.com/random`)
 
 ---
 
-## React 19 `use()` vs Klasik Veri Çekme
+## Project Description
 
-Bu projede kullanılan `use()` hook’u, React 19 ile gelen yeniliklerden biridir. Aşağıda eski yöntemle farkını görebilirsin:
+In this project, data is asynchronously fetched inside a **Server Component** using the `use()` hook. This results in:
+- Cleaner code
+- Data fetching wrapped with `Suspense`, automatically showing a loading screen.
 
-### Eski Yöntem: `useEffect` + `useState`
+---
+
+## React 19 `use()` vs Traditional Data Fetching
+
+The `use()` hook used in this project is a new feature introduced in React 19. Below is a comparison with the old method:
+
+### Old Method: `useEffect` + `useState`
 
 ```tsx
 'use client'
@@ -40,12 +41,13 @@ export default function HomePage() {
       .then(data => setJoke(data));
   }, []);
 
-  if (!joke) return <p>Yükleniyor...</p>;
+  if (!joke) return <p>Loading...</p>;
 
   return <div>{joke.activity}</div>;
 }
+```
 
-###  Yeni Yöntem: React 19 `use()`
+### New Method: React 19 `use()`
 
 ```tsx
 import { use } from 'react';
@@ -60,19 +62,19 @@ export default function HomePage() {
 
 ---
 
-### Karşılaştırma Tablosu
+### Comparison Table
 
-| Özellik                     | useEffect (Eski) | use() (Yeni) |
-|-----------------------------|------------------|--------------|
-| Server-side çalışır mı?     | Hayır            | Evet         |
-| Kod karmaşıklığı            | Yüksek           | Düşük        |
-| Yükleme ekranı              | Manuel           | `Suspense` ile otomatik |
-| SEO Dostu                   | Düşük            | Yüksek       |
-| Modernlik                   | Eski             |  Yeni ve modern |
+| Feature                     | useEffect (Old) | use() (New)          |
+|-----------------------------|-----------------|---------------------|
+| Runs server-side?           | No              | Yes                 |
+| Code complexity             | High            | Low                 |
+| Loading screen              | Manual          | Automatic with Suspense |
+| SEO friendliness            | Low             | High                |
+| Modernity                   | Old             | New and modern       |
 
 ---
 
-##  Kurulum
+## Installation
 
 ```bash
 git clone https://github.com/pltyns/react-projects.git
@@ -83,19 +85,16 @@ npm run dev
 
 ---
 
----
+## Notes
 
-##  Notlar
-
-- `use()` sadece Server Component içinde çalışır.
-- `HomePage.tsx` bileşeni **"use client"** içermemelidir.
-- Yüklenme durumu `Suspense` ile otomatik kontrol edilir.
+- `use()` only works inside Server Components.
+- The `HomePage.tsx` component should **NOT** include `"use client"`.
+- Loading state is handled automatically by `Suspense`.
 
 ---
 
-## Geliştiren
+## Developed by
+
 - [@pltyns](https://github.com/pltyns)
+
 ---
-
-
-
