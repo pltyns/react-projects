@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# React 19 `use()` Hook Activity App
 
-First, run the development server:
+This project fetches a random activity from the Bored API using the new React 19 `use()` hook. It is built with Next.js 13+ App Router.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Technologies Used
+
+- TypeScript
+- Suspense (loading screen)
+- Server Components
+- Bored API (`https://bored-api.appbrewery.com/random`)
+
+---
+
+## Project Description
+
+In this project, data is asynchronously fetched inside a **Server Component** using the `use()` hook. This results in:
+- Cleaner code
+- Data fetching wrapped with `Suspense`, automatically showing a loading screen.
+
+---
+
+## React 19 `use()` vs Traditional Data Fetching
+
+The `use()` hook used in this project is a new feature introduced in React 19. Below is a comparison with the old method:
+
+### Old Method: `useEffect` + `useState`
+
+```tsx
+'use client'
+import { useEffect, useState } from 'react';
+
+export default function HomePage() {
+  const [joke, setJoke] = useState(null);
+
+  useEffect(() => {
+    fetch('https://bored-api.appbrewery.com/random')
+      .then(res => res.json())
+      .then(data => setJoke(data));
+  }, []);
+
+  if (!joke) return <p>Loading...</p>;
+
+  return <div>{joke.activity}</div>;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### New Method: React 19 `use()`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```tsx
+import { use } from 'react';
+import { getJoke } from '@/lib/api';
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+export default function HomePage() {
+  const joke = use(getJoke());
 
-## Learn More
+  return <div>{joke.activity}</div>;
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Comparison Table
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Feature                     | useEffect (Old) | use() (New)          |
+|-----------------------------|-----------------|---------------------|
+| Runs server-side?           | No              | Yes                 |
+| Code complexity             | High            | Low                 |
+| Loading screen              | Manual          | Automatic with Suspense |
+| SEO friendliness            | Low             | High                |
+| Modernity                   | Old             | New and modern       |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+git clone https://github.com/pltyns/react-projects.git
+cd react-projects/react19-use-hook-demo
+npm install
+npm run dev
+```
+
+---
+
+## Notes
+
+- `use()` only works inside Server Components.
+- The `HomePage.tsx` component should **NOT** include `"use client"`.
+- Loading state is handled automatically by `Suspense`.
+
+---
+
+## Developed by
+
+- [@pltyns](https://github.com/pltyns)
+
+---
