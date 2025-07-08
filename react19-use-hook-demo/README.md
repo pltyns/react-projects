@@ -4,7 +4,7 @@ Bu proje, React 19 ile birlikte gelen `use()` hook'unu kullanarak rastgele bir a
 
 ---
 
-## 🔧 Kullanılan Teknolojiler
+##  Kullanılan Teknolojiler
 
 -  TypeScript
 -  Suspense (yüklenme ekranı)
@@ -45,8 +45,8 @@ export default function HomePage() {
   return <div>{joke.activity}</div>;
 }
 
+###  Yeni Yöntem: React 19 `use()`
 
-### Yeni Yöntem: `React 19 use()` 
 ```tsx
 import { use } from 'react';
 import { getJoke } from '@/lib/api';
@@ -56,5 +56,46 @@ export default function HomePage() {
 
   return <div>{joke.activity}</div>;
 }
+```
+
+---
+
+### Karşılaştırma Tablosu
+
+| Özellik                     | useEffect (Eski) | use() (Yeni) |
+|-----------------------------|------------------|--------------|
+| Server-side çalışır mı?     | Hayır            | Evet         |
+| Kod karmaşıklığı            | Yüksek           | Düşük        |
+| Yükleme ekranı              | Manuel           | `Suspense` ile otomatik |
+| SEO Dostu                   | Düşük            | Yüksek       |
+| Modernlik                   | Eski             |  Yeni ve modern |
+
+---
+
+##  Kurulum
+
+```bash
+git clone https://github.com/pltyns/react-projects.git
+cd react-projects/react19-use-hook-demo
+npm install
+npm run dev
+```
+
+---
+
+---
+
+##  Notlar
+
+- `use()` sadece Server Component içinde çalışır.
+- `HomePage.tsx` bileşeni **"use client"** içermemelidir.
+- Yüklenme durumu `Suspense` ile otomatik kontrol edilir.
+
+---
+
+## Geliştiren
+- [@pltyns](https://github.com/pltyns)
+---
+
 
 
