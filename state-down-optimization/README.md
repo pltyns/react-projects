@@ -36,7 +36,7 @@ Traditional state lifting involves moving state *upward* to a common parent comp
 import { useState } from 'react';
 import ExpensiveTree from './ExpensiveTree';
 
-function App() {
+function App(1)() {
   const [color, setColor] = useState('red');
 
   return (
@@ -47,8 +47,26 @@ function App() {
     </div>
   );
 }
+export default App(1);
+```
+### Optimized (State Down)
+
+```jsx
+// App.js
+import Form from './Form';
+import ExpensiveTree from './ExpensiveTree';
+
+function App() {
+  return (
+    <div>
+      <Form />
+      <ExpensiveTree />
+    </div>
+  );
+}
 export default App;
 ```
+
 
 ---
 ### Comparison Table
