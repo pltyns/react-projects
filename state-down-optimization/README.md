@@ -49,6 +49,8 @@ function App() {
 }
 export default App;
 ---
+
+---
 ### Comparison Table
 
 | Feature                     | App(1).js (Unoptimized) | App.js + Form.jsx (Optimized)|
