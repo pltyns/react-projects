@@ -48,7 +48,7 @@ function App() {
   );
 }
 export default App;
----
+```
 
 ---
 ### Comparison Table
