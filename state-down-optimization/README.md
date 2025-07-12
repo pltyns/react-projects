@@ -29,7 +29,7 @@ Traditional state lifting involves moving state *upward* to a common parent comp
 
 ---
 
-### 🔴 Unoptimized (Traditional)
+###  Unoptimized (Traditional)
 
 ```jsx
 // App(1).js
