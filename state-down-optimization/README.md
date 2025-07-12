@@ -48,3 +48,27 @@ function App() {
   );
 }
 export default App;
+
+### Comparison Table
+
+| Feature                     | App(1).js (Unoptimized) | App.js + Form.jsx (Optimized)|
+|-----------------------------|-------------------------|------------------------------|
+| State location              | Global (App)            | Local (Form)                 |
+|ExpensiveTree re-renders?    | Yes                     | No                           |
+| Performance                 | Worse                   | Better                       |
+| Code separation / modularity| Less modular            | More Modular                 |
+
+---
+## Installation
+
+```bash
+git clone https://github.com/pltyns/react-projects.git
+cd react-projects/state-down-optimization
+npm install
+npm run dev
+```
+## Developed by
+
+- [@pltyns](https://github.com/pltyns)
+
+---
