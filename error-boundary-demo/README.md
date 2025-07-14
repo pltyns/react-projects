@@ -35,14 +35,14 @@ In this project, we simulate an error in a `UserDetails` component by deliberate
 ```jsx
 <h2>{user.name.toUpperCase()}</h2>
 <p>{user.email}</p>
-
+```
 ###  **Faulty Behavior Triggered**
 
 ```jsx
 if (shouldCrash) {
   delete data.name; // Force a crash
 }
-
+```
 ### **ErrorBoundary Usage**
 
 ```jsx
@@ -52,7 +52,7 @@ if (shouldCrash) {
 >
   <UserDetails />
 </ErrorBoundary>
-
+```
 ### Comparison Table
 
 | Component                   |Responsibility                           | 
