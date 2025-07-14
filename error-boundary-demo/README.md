@@ -1,12 +1,81 @@
-# React + Vite
+# React Error Boundary Demo App (Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates how to use the **`react-error-boundary`** package to gracefully handle runtime errors in a React application built with Vite. The app simulates a crash when faulty data is rendered, and recovers using a custom fallback UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## Expanding the ESLint configuration
+- React 18+
+- Vite
+- Functional Components
+- useEffect Hook
+- react-error-boundary
+- Fetch API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Project Description
+
+In this project, we simulate an error in a `UserDetails` component by deliberately removing required data (e.g., `name`) after fetching user data from a fake API. When the error occurs, an `ErrorBoundary` catches it and displays a friendly fallback UI with an option to retry.
+
+---
+
+## How It Works
+
+1. The `UserDetails` component fetches user data from `https://jsonplaceholder.typicode.com/users/1`.
+2. If the user clicks the "Veriyi Boz" (Corrupt Data) button, it removes the `name` field before rendering.
+3. This triggers a runtime error in `user.name.toUpperCase()`, which is caught by `ErrorBoundary`.
+4. `ErrorFallback` displays the error message and a button to reload the app.
+
+---
+
+### Normal Behavior
+
+```jsx
+<h2>{user.name.toUpperCase()}</h2>
+<p>{user.email}</p>
+
+###  **Faulty Behavior Triggered**
+
+```jsx
+if (shouldCrash) {
+  delete data.name; // Force a crash
+}
+
+### **ErrorBoundary Usage**
+
+```jsx
+<ErrorBoundary
+  FallbackComponent={ErrorFallback}
+  onReset={() => window.location.reload()}
+>
+  <UserDetails />
+</ErrorBoundary>
+
+### Comparison Table
+
+| Component                   |Responsibility                           | 
+|-----------------------------|-----------------------------------------|
+|App.jsx            | Wraps UserDetails with ErrorBoundary              | 
+| UserDetails.jsx   | Fetches and displays user info, simulates a crash | 
+| ErrorFallback.jsx | Displays error message and retry button           | 
+
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/pltyns/react-projects.git
+cd react-projects/error-boundary-demo
+npm install
+npm run dev
+
+```
+
+## Developed by
+
+- [@pltyns](https://github.com/pltyns)
+
+---
