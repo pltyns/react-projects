@@ -1,94 +1,56 @@
-# React State Down Pattern Demo App
+#  React Web Vitals Demo
 
-This project demonstrates the performance benefits of applying the **"State Down"** pattern in React applications by preventing unnecessary re-renders of heavy components like `ExpensiveTree`.
+This project demonstrates how to monitor **Web Vitals** in real-time within a React application using the `web-vitals` library. It visualizes key performance metrics like **TTFB**, **FCP**, **LCP**, **FID**, and **CLS**, and provides descriptive feedback about each.
 
 ---
 
-## Technologies Used
+##  Technologies Used
 
 - React 18+
 - Functional Components
-- useState Hook
-- Component Composition
+- Hooks (`useState`, `useEffect`)
+- [web-vitals](https://www.npmjs.com/package/web-vitals) library
 
 ---
 
-## Project Description
+##  Project Description
 
-In this project, we compare two versions of a simple React app:
-- One with the state held **locally** inside a `Form` component (optimized).
-- Another with the state lifted **up** to the `App` component (non-optimized).
+In this project, we measure and display the **core web performance metrics** provided by the `web-vitals` library. These metrics help developers understand and optimize the perceived loading speed, responsiveness, and layout stability of a web page.
 
-The app includes an `ExpensiveTree` component which simulates a slow render. The goal is to **prevent this component from re-rendering unnecessarily** by using better state placement practices.
+### Displayed Metrics
+
+- **TTFB (Time to First Byte)** – Measures the time it takes for the first byte to arrive from the server.
+- **FCP (First Contentful Paint)** – Time until the first piece of content is rendered.
+- **LCP (Largest Contentful Paint)** – Time it takes for the largest visible element to load.
+- **FID (First Input Delay)** – Measures user interaction latency.
+- **CLS (Cumulative Layout Shift)** – Detects unexpected layout shifts during load.
+
+Each metric is shown with:
+- A **description** of what it represents
+- A **status** badge: ✅ Good / ⚠️ Needs Improvement / ❌ Poor
+
+---
+
+##  Educational Purpose
+
+This demo is useful for:
+- Learning **React hooks** and component structure
+- Understanding **performance optimization**
+- Practicing **real-time monitoring** with third-party libraries
 
 ---
 
-## React State Down Pattern vs Traditional State Lifting
+##  Sample Output
 
-Traditional state lifting involves moving state *upward* to a common parent component. However, when the state isn't shared and heavy siblings are present, it's often better to **"lift state down"** — keeping state only where it's needed.
-
----
-
-###  Unoptimized (Traditional)
-
-```jsx
-// App(1).js
-import { useState } from 'react';
-import ExpensiveTree from './ExpensiveTree';
-
-function App(1)() {
-  const [color, setColor] = useState('red');
-
-  return (
-    <div>
-      <input value={color} onChange={(e) => setColor(e.target.value)} />
-      <p style={{ color }}>Hello ,I am a Developer !!</p>
-      <ExpensiveTree />
-    </div>
-  );
-}
-export default App(1);
-```
-### Optimized (State Down)
-
-```jsx
-// App.js
-import Form from './Form';
-import ExpensiveTree from './ExpensiveTree';
-
-function App() {
-  return (
-    <div>
-      <Form />
-      <ExpensiveTree />
-    </div>
-  );
-}
-export default App;
-```
-
+> Metrics are displayed in styled boxes with values, explanations, and health statuses.  
+> Each reloaded visit may show different values based on network/server conditions.
 
 ---
-### Comparison Table
 
-| Feature                     | App(1).js (Unoptimized) | App.js + Form.jsx (Optimized)|
-|-----------------------------|-------------------------|------------------------------|
-| State location              | Global (App)            | Local (Form)                 |
-|ExpensiveTree re-renders?    | Yes                     | No                           |
-| Performance                 | Worse                   | Better                       |
-| Code separation / modularity| Less modular            | More Modular                 |
-
----
-## Installation
+##  Installation & Run
 
 ```bash
-git clone https://github.com/pltyns/react-projects.git
-cd react-projects/state-down-optimization
+git clone https://github.com/pltyns/react-web-vitals.git
+cd react-web-vitals-demo
 npm install
-npm run dev
-```
-## Developed by
-
-- [@pltyns](https://github.com/pltyns)
-
----
+npm start
